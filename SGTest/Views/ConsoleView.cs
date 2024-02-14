@@ -14,18 +14,18 @@ namespace SGTest.Views
     public class ConsoleView
     {
 
-        private DepartmentsController departmentsController;
-        private EmployeesController employeesController;
-        private JobTitleController jobTitleController;
+        private IDepartmentsController departmentsController;
+        private IEmployeesController employeesController;
+        private IJobTitleController jobTitleController;
 
         /// <summary>
         /// Выполняет инициализацию жкземпляра класса <see cref="ConsoleView"/>
         /// </summary>
-        public ConsoleView()
+        public ConsoleView(IDepartmentsController departmentsController, IEmployeesController employeesController, IJobTitleController jobTitleController)
         {
-            departmentsController = new DepartmentsController();
-            employeesController = new EmployeesController();
-            jobTitleController = new JobTitleController();
+            this.departmentsController = departmentsController;
+            this.employeesController = employeesController;
+            this.jobTitleController = jobTitleController;
         }
 
         /// <summary>

@@ -1,31 +1,26 @@
 ﻿using SGTest.Models.DatabaseModels;
 using SGTest.Repoitories;
 using SGTest.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SGTest.Controllers
 {
     /// <summary>
     /// Класс контроллера для подразделения
     /// </summary>
-    public class DepartmentsController
+    public class DepartmentsController : IDepartmentsController
     {
-        private DepartmentRepository departmentRepository;
-        private EmployeeRepository employeeRepository;
-        private DepartmentsImportService departmentsImportService;
+        private IDepartmentRepository departmentRepository;
+        private IEmployeeRepository employeeRepository;
+        private IDepartmentImportService departmentsImportService;
        
         /// <summary>
         /// Выполняет инициализацию экземпляра класса <see cref="DepartmentsController"/>
         /// </summary>
-        public DepartmentsController()
+        public DepartmentsController(IDepartmentRepository departmentRepository, IEmployeeRepository employeeRepository, IDepartmentImportService departmentImportService)
         {
-            departmentRepository = new DepartmentRepository();
-            employeeRepository = new EmployeeRepository();
-            departmentsImportService = new DepartmentsImportService();
+            this.departmentRepository = departmentRepository;
+            this.employeeRepository = employeeRepository;
+            this.departmentsImportService = departmentImportService;
         }
 
         /// <summary>
@@ -36,7 +31,7 @@ namespace SGTest.Controllers
         public async Task ImportDepartmentsAsync(string departmentsFilePath)
         {
             
-            var departmentsImportedList = departmentsImportService.ImportTSVDepartments(departmentsFilePath);
+            var departmentsImportedList = departmentsImportService.ImportFromTSVDepartments(departmentsFilePath);
             foreach (var deparmentImport in departmentsImportedList)
             {
                 try
@@ -58,7 +53,7 @@ namespace SGTest.Controllers
         /// </summary>
         public void DisplayAllDepartments()
         {
-            var allDepartments = departmentRepository.GetAllDepartments();
+            var allDepartments = departmentRepository.GetAll();
             foreach (var department in allDepartments)
             {
                 Console.Write(department.Id + "\t" );
@@ -76,7 +71,7 @@ namespace SGTest.Controllers
         /// </summary>
         public void DisplayDepartmentsIerarchy()
         {
-            var allDepartments = departmentRepository.GetAllDepartments().OrderBy(x => x).ToList();
+            var allDepartments = departmentRepository.GetAll().OrderBy(x => x).ToList();
             var allEmployees = employeeRepository.GetAll().ToList();
 
             Console.WriteLine("Организационная иерархия:");
@@ -93,7 +88,7 @@ namespace SGTest.Controllers
         /// <param name="id">Идентификатор подразделения</param>
         public void DisplayDepartmentsIerarchy(int id)
         {
-            var allDepartments = departmentRepository.GetAllDepartments().OrderBy(x => x).ToList();
+            var allDepartments = departmentRepository.GetAll().OrderBy(x => x).ToList();
             var hierarchy = GetDepartmentHierarchy(allDepartments, id);
 
             var descendingHierarchy = hierarchy.Reverse();

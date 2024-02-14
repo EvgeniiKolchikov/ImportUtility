@@ -6,19 +6,19 @@ namespace SGTest.Controllers
     /// <summary>
     /// Класс контроллера для Должностей
     /// </summary>
-    public class JobTitleController
+    public class JobTitleController : IJobTitleController
     {
 
-        private JobTitleRepository jobTitleRepository;
-        private JobTitleImportService jobTitleImportService;
+        private IJobTitleRepository jobTitleRepository;
+        private IJobTitleImportService jobTitleImportService;
 
         /// <summary>
         /// Выполняет инициализацию экземпляра класса <see cref="JobTitleController"/>
         /// </summary>
-        public JobTitleController()
+        public JobTitleController(IJobTitleRepository jobTitleRepository, IJobTitleImportService jobTitleImportService)
         {
-            jobTitleRepository = new JobTitleRepository();
-            jobTitleImportService = new JobTitleImportService();
+            this.jobTitleRepository = jobTitleRepository;
+            this.jobTitleImportService = jobTitleImportService;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace SGTest.Controllers
         /// <returns></returns>
         public async Task ImportJobTitlesAsync(string filePath)
         {
-            var jobTitleImportedList = jobTitleImportService.ImportTSVJobTitles(filePath);
+            var jobTitleImportedList = jobTitleImportService.ImportFromTSVJobTitles(filePath);
 
             foreach (var jobTitleImportModel in jobTitleImportedList)
             {

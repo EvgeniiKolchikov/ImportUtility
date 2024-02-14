@@ -14,16 +14,16 @@ namespace SGTest.Repoitories
     /// <summary>
     /// Класс репозитория для подразделений
     /// </summary>
-    public class DepartmentRepository
+    public class DepartmentRepository : IDepartmentRepository
     {
         private Context context;
        
         /// <summary>
         /// Выполняет инициализацию экземпляра класса <see cref="DepartmentRepository"/>
         /// </summary>
-        public DepartmentRepository()
+        public DepartmentRepository(Context context)
         {
-            this.context = new Context();
+            this.context = context;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace SGTest.Repoitories
         /// Получает все департаменты
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Department> GetAllDepartments()
+        public IQueryable<Department> GetAll()
         {
             return this.context.Departments;
         }

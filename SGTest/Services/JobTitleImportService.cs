@@ -10,7 +10,7 @@ namespace SGTest.Services
     /// <summary>
     /// Класс сервиса для импорте данных должностей из TSV файла
     /// </summary>
-    public class JobTitleImportService
+    public class JobTitleImportService : IJobTitleImportService
     {
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace SGTest.Services
         /// </summary>
         /// <param name="filePath">Путь к файлу</param>
         /// <returns>Импортированные данные</returns>
-        public List<JobTitleImportModel> ImportTSVJobTitles(string filePath)
+        public List<JobTitleImportModel> ImportFromTSVJobTitles(string filePath)
         {
             var tsvDataList = File.ReadAllLines(filePath).Skip(1).Select(x => x.Split("\t")).ToList();
 

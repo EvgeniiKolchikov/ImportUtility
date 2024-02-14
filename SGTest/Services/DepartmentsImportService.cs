@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace SGTest.Services
 {
     /// <summary>
-    /// Класс сервиса извлечения данных из TSV файла
+    /// Класс сервиса извлечения данных депертаментов из TSV файла 
     /// </summary>
-    public class DepartmentsImportService
+    public class DepartmentsImportService : IDepartmentImportService
     {
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace SGTest.Services
         /// </summary>
         /// <param name="filePath">Путь к файлу</param>
         /// <returns>Импортированные данные</returns>
-        public List<DepartmentImportModel> ImportTSVDepartments(string filePath)
+        public List<DepartmentImportModel> ImportFromTSVDepartments(string filePath)
         {
 
             var tsvDataList = File.ReadAllLines(filePath).Skip(1).Select(x => x.Split("\t")).ToList();

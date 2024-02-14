@@ -12,16 +12,16 @@ namespace SGTest.Repoitories
     /// <summary>
     /// Класс репозитория для подразделений
     /// </summary>
-    public class EmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private Context context;
 
         /// <summary>
         /// Выполняет инициализацию экземпляра класса <see cref="EmployeeRepository"/>
         /// </summary>
-        public EmployeeRepository()
+        public EmployeeRepository(Context context)
         {
-            this.context = new Context();
+            this.context = context;
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace SGTest.Services
     /// <summary>
     /// Класс сервиса извлечения сотрудников из TSV файла
     /// </summary>
-    public class EmployeesImportService
+    public class EmployeesImportService : IEmployeesImportService
     {
         /// <summary>
         /// Выполняет импорт данных из Tsv файла

@@ -11,19 +11,19 @@ namespace SGTest.Controllers
     /// <summary>
     /// Класс контроллера для сотрудников
     /// </summary>
-    public class EmployeesController
+    public class EmployeesController : IEmployeesController
     {
 
-        private EmployeeRepository employeeRepository;
-        private EmployeesImportService employeeImportService;
+        private IEmployeeRepository employeeRepository;
+        private IEmployeesImportService employeeImportService;
 
         /// <summary>
         /// Выполняет инициализацию экземпляра класса <see cref="EmployeesController"/>
         /// </summary>
-        public EmployeesController()
+        public EmployeesController(IEmployeeRepository employeeRepository, IEmployeesImportService employeeImportService)
         {
-            employeeRepository = new EmployeeRepository();
-            employeeImportService = new EmployeesImportService();
+            this.employeeRepository = employeeRepository;
+            this.employeeImportService = employeeImportService;
         }
 
         /// <summary>

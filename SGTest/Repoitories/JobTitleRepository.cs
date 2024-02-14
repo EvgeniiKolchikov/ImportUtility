@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace SGTest.Repoitories
 {
-    public class JobTitleRepository
+    public class JobTitleRepository : IJobTitleRepository
     {
         private Context context;
 
         /// <summary>
         /// Выполняет инициализацию экземпляра класса <see cref="JobTitleRepository"/>
         /// </summary>
-        public JobTitleRepository()
+        public JobTitleRepository(Context context)
         {
-            this.context = new Context();
+            this.context = context;
         }
 
         /// <summary>
